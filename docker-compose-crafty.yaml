@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  crafty:
+    container_name: crafty_container
+    image: registry.gitlab.com/crafty-controller/crafty-4:latest
+    restart: always
+    environment:
+      - TZ=Etc/UTC
+    ports:
+      - "8443:8443" # HTTPS
+      - "8122:8122" # DYNMAP
+      - "19132:19132/udp" # BEDROCK
+      - "25500-25600:25500-25600" # MC SERV PORT RANGE
+    volumes:
+      - /home/umbrel/umbrel/data/storage/backups/minecraft/backups:/crafty/backups
+      - /home/umbrel/umbrel/data/storage/backups/minecraft/logs:/crafty/logs
+      - /home/umbrel/umbrel/data/storage/backups/minecraft/servers:/crafty/servers
+      - /home/umbrel/umbrel/data/storage/backups/minecraft/config:/crafty/app/config
+      - /home/umbrel/umbrel/data/storage/backups/minecraft/import:/crafty/import
